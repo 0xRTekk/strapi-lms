@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_global_ctas",
+  "info": {
+    "displayName": "Button",
+    "icon": "cursor",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary",
+        "outline-primary",
+        "outline-secondary"
+      ]
+    }
+  }
+}

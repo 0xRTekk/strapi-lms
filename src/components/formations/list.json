@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_formations_lists",
+  "info": {
+    "displayName": "List",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "formations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::formation.formation"
+    }
+  }
+}

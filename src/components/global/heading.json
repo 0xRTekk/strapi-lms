@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_global_headings",
+  "info": {
+    "displayName": "Heading",
+    "icon": "bold"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    }
+  }
+}

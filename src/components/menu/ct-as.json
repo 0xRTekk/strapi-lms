@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_menu_ct_as",
+  "info": {
+    "displayName": "CTAs",
+    "icon": "expand"
+  },
+  "options": {},
+  "attributes": {
+    "button": {
+      "type": "component",
+      "repeatable": true,
+      "component": "global.cta"
+    }
+  }
+}
