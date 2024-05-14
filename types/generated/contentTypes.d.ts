@@ -742,7 +742,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -794,6 +793,7 @@ export interface ApiChapterChapter extends Schema.CollectionType {
     singularName: 'chapter';
     pluralName: 'chapters';
     displayName: 'Chapter';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -817,7 +817,7 @@ export interface ApiChapterChapter extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    image: Attribute.Media &
+    cover: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -863,6 +863,7 @@ export interface ApiFormationFormation extends Schema.CollectionType {
     singularName: 'formation';
     pluralName: 'formations';
     displayName: 'Formation';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -887,7 +888,7 @@ export interface ApiFormationFormation extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    image: Attribute.Media &
+    cover: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -919,38 +920,6 @@ export interface ApiFormationFormation extends Schema.CollectionType {
       'api::formation.formation'
     >;
     locale: Attribute.String;
-  };
-}
-
-export interface ApiLandingPageLandingPage extends Schema.SingleType {
-  collectionName: 'landing_pages';
-  info: {
-    singularName: 'landing-page';
-    pluralName: 'landing-pages';
-    displayName: 'Landing page';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    heroSection: Attribute.DynamicZone<['global.heading', 'global.image']>;
-    formationsSection: Attribute.DynamicZone<['formations.list']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::landing-page.landing-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::landing-page.landing-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
   };
 }
 
@@ -1032,12 +1001,13 @@ export interface ApiMainMenuMainMenu extends Schema.SingleType {
     singularName: 'main-menu';
     pluralName: 'main-menus';
     displayName: 'Main menu';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    content: Attribute.DynamicZone<
+    body: Attribute.DynamicZone<
       ['menu.ct-as', 'menu.dropdown-menu', 'global.link']
     >;
     createdAt: Attribute.DateTime;
@@ -1051,6 +1021,39 @@ export interface ApiMainMenuMainMenu extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::main-menu.main-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMetaDataMetaData extends Schema.SingleType {
+  collectionName: 'meta_datas';
+  info: {
+    singularName: 'meta-data';
+    pluralName: 'meta-datas';
+    displayName: 'Meta data';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    siteName: Attribute.String;
+    favicon: Attribute.Media;
+    siteDescription: Attribute.Text;
+    defaultSeo: Attribute.Component<'global.seo'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::meta-data.meta-data',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::meta-data.meta-data',
       'oneToOne',
       'admin::user'
     > &
@@ -1078,9 +1081,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::chapter.chapter': ApiChapterChapter;
       'api::formation.formation': ApiFormationFormation;
-      'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::lesson.lesson': ApiLessonLesson;
       'api::main-menu.main-menu': ApiMainMenuMainMenu;
+      'api::meta-data.meta-data': ApiMetaDataMetaData;
     }
   }
 }

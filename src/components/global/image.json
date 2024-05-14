@@ -1,17 +1,21 @@
 {
   "collectionName": "components_global_images",
   "info": {
-    "displayName": "Image",
-    "icon": "picture"
+    "displayName": "Media",
+    "icon": "picture",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "image": {
-      "allowedTypes": [
-        "images"
-      ],
+    "file": {
       "type": "media",
-      "multiple": true
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos",
+        "files"
+      ]
     }
   }
 }

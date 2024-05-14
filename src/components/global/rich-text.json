@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_global_rich_texts",
+  "info": {
+    "displayName": "Rich text",
+    "icon": "layout"
+  },
+  "options": {},
+  "attributes": {
+    "body": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

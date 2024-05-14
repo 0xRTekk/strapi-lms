@@ -1,24 +1,11 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface FormationsFormationCard extends Schema.Component {
-  collectionName: 'components_formations_formation_cards';
-  info: {
-    displayName: 'Formation card';
-    icon: 'expand';
-  };
-  attributes: {
-    image: Attribute.Media;
-    name: Attribute.String;
-    description: Attribute.Text;
-    cta: Attribute.Component<'global.cta'>;
-  };
-}
-
 export interface FormationsList extends Schema.Component {
   collectionName: 'components_formations_lists';
   info: {
-    displayName: 'List';
+    displayName: 'Formations List';
     icon: 'bulletList';
+    description: '';
   };
   attributes: {
     formations: Attribute.Relation<
@@ -60,11 +47,12 @@ export interface GlobalHeading extends Schema.Component {
 export interface GlobalImage extends Schema.Component {
   collectionName: 'components_global_images';
   info: {
-    displayName: 'Image';
+    displayName: 'Media';
     icon: 'picture';
+    description: '';
   };
   attributes: {
-    image: Attribute.Media;
+    file: Attribute.Media;
   };
 }
 
@@ -77,6 +65,37 @@ export interface GlobalLink extends Schema.Component {
   attributes: {
     title: Attribute.String;
     url: Attribute.String;
+  };
+}
+
+export interface GlobalRichText extends Schema.Component {
+  collectionName: 'components_global_rich_texts';
+  info: {
+    displayName: 'Rich text';
+    icon: 'layout';
+  };
+  attributes: {
+    body: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface GlobalSeo extends Schema.Component {
+  collectionName: 'components_global_seos';
+  info: {
+    displayName: 'Seo';
+    icon: 'search';
+  };
+  attributes: {
+    metaTitle: Attribute.String;
+    metaDescription: Attribute.Text;
+    shareImage: Attribute.Media;
   };
 }
 
@@ -110,12 +129,13 @@ export interface MenuDropdownMenu extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'formations.formation-card': FormationsFormationCard;
       'formations.list': FormationsList;
       'global.cta': GlobalCta;
       'global.heading': GlobalHeading;
       'global.image': GlobalImage;
       'global.link': GlobalLink;
+      'global.rich-text': GlobalRichText;
+      'global.seo': GlobalSeo;
       'menu.ct-as': MenuCtAs;
       'menu.dropdown-menu': MenuDropdownMenu;
     }

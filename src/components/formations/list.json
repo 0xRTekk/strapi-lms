@@ -1,8 +1,9 @@
 {
   "collectionName": "components_formations_lists",
   "info": {
-    "displayName": "List",
-    "icon": "bulletList"
+    "displayName": "Formations List",
+    "icon": "bulletList",
+    "description": ""
   },
   "options": {},
   "attributes": {
