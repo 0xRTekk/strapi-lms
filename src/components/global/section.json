@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_global_sections",
+  "info": {
+    "displayName": "Section",
+    "icon": "expand"
+  },
+  "options": {},
+  "attributes": {
+    "sectionHeading": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.heading"
+    },
+    "sectionMedia": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.image"
+    },
+    "sectionContent": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.rich-text"
+    },
+    "sectionButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.cta"
+    }
+  }
+}

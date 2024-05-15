@@ -787,6 +787,64 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAnswerAnswer extends Schema.CollectionType {
+  collectionName: 'answers';
+  info: {
+    singularName: 'answer';
+    pluralName: 'answers';
+    displayName: 'Answer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    answer: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    correct: Attribute.Boolean &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    quiz: Attribute.Relation<
+      'api::answer.answer',
+      'manyToOne',
+      'api::quiz.quiz'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::answer.answer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::answer.answer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::answer.answer',
+      'oneToMany',
+      'api::answer.answer'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiChapterChapter extends Schema.CollectionType {
   collectionName: 'chapters';
   info: {
@@ -923,6 +981,64 @@ export interface ApiFormationFormation extends Schema.CollectionType {
   };
 }
 
+export interface ApiLandingpageLandingpage extends Schema.SingleType {
+  collectionName: 'landingpages';
+  info: {
+    singularName: 'landingpage';
+    pluralName: 'landingpages';
+    displayName: 'Landingpage';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    body: Attribute.DynamicZone<
+      [
+        'formations.list',
+        'global.heading',
+        'global.image',
+        'global.rich-text',
+        'global.seo',
+        'global.cta',
+        'global.section',
+        'global.slider'
+      ]
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::landingpage.landingpage',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::landingpage.landingpage',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::landingpage.landingpage',
+      'oneToMany',
+      'api::landingpage.landingpage'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiLessonLesson extends Schema.CollectionType {
   collectionName: 'lessons';
   info: {
@@ -971,6 +1087,11 @@ export interface ApiLessonLesson extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    quizzes: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToMany',
+      'api::quiz.quiz'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1061,6 +1182,55 @@ export interface ApiMetaDataMetaData extends Schema.SingleType {
   };
 }
 
+export interface ApiQuizQuiz extends Schema.CollectionType {
+  collectionName: 'quizzes';
+  info: {
+    singularName: 'quiz';
+    pluralName: 'quizzes';
+    displayName: 'Quiz';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    question: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    answers: Attribute.Relation<
+      'api::quiz.quiz',
+      'oneToMany',
+      'api::answer.answer'
+    >;
+    lesson: Attribute.Relation<
+      'api::quiz.quiz',
+      'manyToOne',
+      'api::lesson.lesson'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::quiz.quiz', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::quiz.quiz', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::quiz.quiz',
+      'oneToMany',
+      'api::quiz.quiz'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1079,11 +1249,14 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::answer.answer': ApiAnswerAnswer;
       'api::chapter.chapter': ApiChapterChapter;
       'api::formation.formation': ApiFormationFormation;
+      'api::landingpage.landingpage': ApiLandingpageLandingpage;
       'api::lesson.lesson': ApiLessonLesson;
       'api::main-menu.main-menu': ApiMainMenuMainMenu;
       'api::meta-data.meta-data': ApiMetaDataMetaData;
+      'api::quiz.quiz': ApiQuizQuiz;
     }
   }
 }

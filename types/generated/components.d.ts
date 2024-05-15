@@ -86,6 +86,20 @@ export interface GlobalRichText extends Schema.Component {
   };
 }
 
+export interface GlobalSection extends Schema.Component {
+  collectionName: 'components_global_sections';
+  info: {
+    displayName: 'Section';
+    icon: 'expand';
+  };
+  attributes: {
+    sectionHeading: Attribute.Component<'global.heading'>;
+    sectionMedia: Attribute.Component<'global.image'>;
+    sectionContent: Attribute.Component<'global.rich-text'>;
+    sectionButton: Attribute.Component<'global.cta'>;
+  };
+}
+
 export interface GlobalSeo extends Schema.Component {
   collectionName: 'components_global_seos';
   info: {
@@ -96,6 +110,17 @@ export interface GlobalSeo extends Schema.Component {
     metaTitle: Attribute.String;
     metaDescription: Attribute.Text;
     shareImage: Attribute.Media;
+  };
+}
+
+export interface GlobalSlider extends Schema.Component {
+  collectionName: 'components_global_sliders';
+  info: {
+    displayName: 'Slider';
+    icon: 'picture';
+  };
+  attributes: {
+    medias: Attribute.Media;
   };
 }
 
@@ -135,7 +160,9 @@ declare module '@strapi/types' {
       'global.image': GlobalImage;
       'global.link': GlobalLink;
       'global.rich-text': GlobalRichText;
+      'global.section': GlobalSection;
       'global.seo': GlobalSeo;
+      'global.slider': GlobalSlider;
       'menu.ct-as': MenuCtAs;
       'menu.dropdown-menu': MenuDropdownMenu;
     }
